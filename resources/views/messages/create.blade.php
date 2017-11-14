@@ -9,17 +9,16 @@
     @else
         <form action="{{ route('mensajes.store') }}" method="POST">
             {{ csrf_field() }}
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}">
-            {!! $errors->first('nombre', '<span class="error">:message</span>')!!}
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" value="{{ old('email') }}">
-            {!! $errors->first('email', '<span class="error">:message</span>')!!}
-            <label for="mensaje">Mensaje</label>
-            <label for="email">Email</label>
-            <textarea name="mensaje" id="mensaje" cols="30" rows="10">{{ old('mensaje') }}</textarea>
-            {!! $errors->first('mensaje', '<span class="error">:message</span>')!!}
-            <input type="submit" value="Enviar">
+            <p><label for="nombre">Nombre</label>
+            <input class="form-control" type="text" name="nombre" id="nombre" value="{{ old('nombre') }}">
+            {!! $errors->first('nombre', '<span class="error">:message</span>')!!}</p>
+            <p><label for="email">Email</label>
+            <input class="form-control" type="email" name="email" id="email" value="{{ old('email') }}">
+            {!! $errors->first('email', '<span class="error">:message</span>')!!}</p>
+            <p><label for="mensaje">Mensaje</label>            
+            <textarea class="form-control" name="mensaje" id="mensaje" cols="30" rows="10">{{ old('mensaje') }}</textarea>
+            {!! $errors->first('mensaje', '<span class="error">:message</span>')!!}</p>
+            <input class="btn btn-primary" type="submit" value="Enviar">
             </form>
     @endif
     
