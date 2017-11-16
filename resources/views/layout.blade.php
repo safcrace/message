@@ -59,7 +59,7 @@
                         <li><a href="logout">Cerrar Sesión de {{ auth()->user()->email }}</a></li>
                     @endif
                     
-                    <!-- <li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Action</a></li>
@@ -67,7 +67,7 @@
                             <li><a href="#">Something else here</a></li>
                             <li><a href="#">Separated link</a></li>
                         </ul>
-                    </li> -->
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div>
@@ -80,6 +80,8 @@
 
         <footer>Copyright ® {{ date('Y') }} </footer>
     </div>
+
+    <script src="js/all.js"></script>
 
 </body>
 </html>

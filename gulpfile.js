@@ -13,4 +13,14 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+
+    mix.scripts([
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+        'resources/assets/js'
+    ], 'public/js/all.js', './');
+
+    mix.browserSync({
+        proxy: 'message.dev'
+    })
 });
