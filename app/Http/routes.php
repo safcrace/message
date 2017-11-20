@@ -13,11 +13,16 @@
 
 Route::get('test', function() {
   $user = New App\User;
-  $user->name = 'Sender Flores';
-  $user->email = 'safcrace@gmail.com';
+  $user->name = 'Mario Almada';
+  $user->email = 'mario@gmail.com';
   $user->password = bcrypt('1234');
+  $user->role_id = 2;
   $user->save();
   return $user;
+});
+
+Route::get('roles', function() {
+  return \App\Role::with('user')->get();
 });
 
 Route::get('/', ['uses' => 'PagesController@home', 'as' => 'home']);
@@ -25,6 +30,7 @@ Route::get('/', ['uses' => 'PagesController@home', 'as' => 'home']);
 Route::get('saludos/{nombre?}', ['as' => 'saludos', 'uses' => 'PagesController@saludo']);
 
 Route::resource('mensajes', 'MessagesController');
+Route::resource('usuarios', 'UsersController');
 
 Route::get('login', 'Auth\AuthController@showLoginForm');
 

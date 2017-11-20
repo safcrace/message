@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPhoneToMessagesTable extends Migration
+class CreateAssignedRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class AddPhoneToMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->string('telefono')->after('email')->nullable();
+        Schema::create('assigned_roles', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->integer('role_id')->unsigned();
         });
     }
 
@@ -24,8 +25,6 @@ class AddPhoneToMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->dropColumn('telefono');
-        });
+        Schema::drop('assigned_roles');
     }
 }

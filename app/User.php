@@ -23,4 +23,33 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function setPasswordAttribute()
+    {
+        $this->attributes['password'] = bcrypt('password');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'assigned_roles');
+    }
+
+    public function hasRoles(array $roles)
+    {   
+        return $this->roles->pluck('name')->intersect($roles)->count();
+        /* foreach ($roles as $role) {            
+            foreach ($this->roles as $userRole) {
+                if ($userRole->name === $role) {
+                    return true;
+                }
+            }
+            
+        }        
+        return false; */
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRoles(['admin']);
+    }
 }
