@@ -9,6 +9,8 @@
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Mensaje</th>
+                <th>Notas</th>
+                <th>Etiquetas</th>
                 <th>Acciones</th>
             </tr>
             <tbody>
@@ -22,6 +24,8 @@
                         </td>
                         <td>{{ $message->email }} </td>
                         <td>{{ $message->mensaje }} </td>
+                        <td>{{ $message->note->body }}</td>
+                        <td>{{ $message->tags->pluck('name')->implode(', ') }}</td>
                         <td>
                             <a class="btn btn-info btn-xs" href="{{ route('mensajes.edit', $message->id) }}">
                                 Editar

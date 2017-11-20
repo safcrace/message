@@ -27,7 +27,7 @@ class MessagesController extends Controller
     public function index()
     {
         // $messages = DB::table('messages')->get();
-        $messages = Message::all();
+        $messages = Message::with('note')->get(); 
         return view('messages.index', compact('messages'));
     }
 

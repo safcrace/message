@@ -28,7 +28,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::All();
+        $users = User::with('note')->get();       
         return view('users.index', compact('users'));
     }
 
