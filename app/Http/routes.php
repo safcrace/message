@@ -11,6 +11,10 @@
 |
 */
 
+/* DB::listen(function($query) {
+  echo "<pre>{$query->sql}</pre>";
+}); */
+
 Route::get('test', function() {
   $user = New App\User;
   $user->name = 'Mario Almada';

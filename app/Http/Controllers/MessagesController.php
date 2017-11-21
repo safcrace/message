@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
 use DB;
 
 use App\Message;
 
 use Carbon\Carbon;
 
+use App\Http\Requests;
+
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CreateMessageRequest;
 
 class MessagesController extends Controller
@@ -27,7 +28,7 @@ class MessagesController extends Controller
     public function index()
     {
         // $messages = DB::table('messages')->get();
-        $messages = Message::with('note')->get(); 
+        $messages = Message::with(['user', 'note', 'tags'])->get(); 
         return view('messages.index', compact('messages'));
     }
 
@@ -57,7 +58,23 @@ class MessagesController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]); */
-        Message::create($request->all());
+        $message = Message::create($request->all());
+
+        if (auth()->check()) {
+            auth()->user()->messages()->save($message);
+        }
+
+        /** Se genera el evento */
+        event(new MessageWasReceived);
+
+        /** Esta se utiliza cuando sabemos que siempre tenemos un usuario autenticado
+         * auth()->user()->messages()->create($request->all());
+         */
+
+        /** Envio de Correo de notificacion */
+        Mail::send('emails.contact', ['msg' => $message], function($ms) use ($message) {
+            $ms->to($message->email, $message->name)->subject('Tu mensaje fue recibido');
+        });
 
         //redireccionamos
 
